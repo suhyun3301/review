@@ -4,9 +4,6 @@ function Community() {
   const textarea = useRef(null)
   const [Posts, setPosts] = useState([])
 
-  const inputValue = input.current.value
-  const textareaValue = textarea.current.value
-
   const resetForm = () => {
     input.current.value = ''
     textarea.current.value = ''
@@ -26,6 +23,15 @@ function Community() {
     ])
 
     resetForm()
+  }
+
+  const enableUpdate = (i) => {
+    setPosts(
+      Posts.map((post, index) => {
+        if (i === index) post.enableUpdate = true
+        return post
+      })
+    )
   }
 
   const deletePost = (i) => {
@@ -68,21 +74,59 @@ function Community() {
         {Posts.map((post, i) => {
           return (
             <div className="post-list" key={i}>
-              <div className="text">
-                <h2>{post.title}</h2>
-                <p>{post.content}</p>
-              </div>
+              {post.enableUpdate ? (
+                <aticle className="enable-box">
+                  <div className="input-box">
+                    <input type="text" defaultValue={post.title} ref={input} />
+                  </div>
 
-              <div className="btn-box">
-                <button>Edit</button>
-                <button
-                  onClick={() => {
-                    deletePost(i)
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
+                  <div className="input-box">
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="3"
+                      defaultValue={post.content}
+                      ref={textarea}
+                    ></textarea>
+                  </div>
+
+                  <div className="btn-box">
+                    <button className="btn" type="button">
+                      Cancel
+                    </button>
+
+                    <button className="btn" type="button">
+                      Update
+                    </button>
+                  </div>
+                </aticle>
+              ) : (
+                <>
+                  <div className="text">
+                    <h2>{post.title}</h2>
+                    <p>{post.content}</p>
+                  </div>
+
+                  <div className="btn-box">
+                    <button
+                      onClick={() => {
+                        enableUpdate(i)
+                      }}
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        deletePost(i)
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )
         })}

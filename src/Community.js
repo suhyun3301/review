@@ -34,6 +34,15 @@ function Community() {
     )
   }
 
+  const disableUpdate = (i) => {
+    setPosts(
+      Posts.map((post, index) => {
+        if (i === index) post.enableUpdate = false
+        return post
+      })
+    )
+  }
+
   const deletePost = (i) => {
     const NewPosts = Posts.filter((_, index) => index !== i)
     setPosts(NewPosts)
@@ -92,7 +101,13 @@ function Community() {
                   </div>
 
                   <div className="btn-box">
-                    <button className="btn" type="button">
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() => {
+                        disableUpdate(i)
+                      }}
+                    >
                       Cancel
                     </button>
 

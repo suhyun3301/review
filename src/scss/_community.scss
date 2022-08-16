@@ -4,7 +4,8 @@
   flex-direction: column;
   align-items: center;
 
-  .create {
+  .create,
+  .show {
     width: 100%;
   }
 
@@ -50,6 +51,7 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+    margin-bottom: 60px;
 
     .btn {
       background-color: transparent;
@@ -58,6 +60,22 @@
       padding: 16px 0;
       cursor: pointer;
       width: 25%;
+    }
+  }
+
+  .show {
+    .post-list {
+      margin-bottom: 20px;
+
+      h2 {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 200;
+      }
     }
   }
 }

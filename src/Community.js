@@ -4,7 +4,19 @@ function Community() {
   const textarea = useRef(null)
   const [Posts, setPosts] = useState([])
 
+  const inputValue = input.current.value
+  const textareaValue = textarea.current.value
+
+  const resetForm = () => {
+    input.current.value = ''
+    textarea.current.value = ''
+  }
+
   const createPost = () => {
+    if (!input.current.value.trim() || !textarea.current.value.trim()) {
+      return alert('내용을 입력하세요')
+    }
+
     setPosts([
       ...Posts,
       {
@@ -12,6 +24,8 @@ function Community() {
         content: textarea.current.value,
       },
     ])
+
+    resetForm()
   }
 
   return (

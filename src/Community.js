@@ -5,6 +5,7 @@ function Community() {
   const inputEdit = useRef(null)
   const textareaEdit = useRef(null)
   const [Posts, setPosts] = useState([])
+  const [Allowed, setAllowed] = useState(true)
 
   const resetForm = () => {
     input.current.value = ''
@@ -28,6 +29,9 @@ function Community() {
   }
 
   const enableUpdate = (i) => {
+    if (!Allowed) return
+    setAllowed(false)
+
     setPosts(
       Posts.map((post, index) => {
         if (i === index) post.enableUpdate = true
@@ -37,6 +41,8 @@ function Community() {
   }
 
   const disableUpdate = (i) => {
+    setAllowed(true)
+
     setPosts(
       Posts.map((post, index) => {
         if (i === index) post.enableUpdate = false

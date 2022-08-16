@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 function Community() {
   const input = useRef(null)
   const textarea = useRef(null)
+  const inputEdit = useRef(null)
+  const textareaEdit = useRef(null)
   const [Posts, setPosts] = useState([])
 
   const resetForm = () => {
@@ -43,6 +45,24 @@ function Community() {
     )
   }
 
+  const updatePost = (i) => {
+    if (!inputEdit.current.value.trim() || !textareaEdit.current.value.trim()) {
+      resetForm()
+      return alert('수정할 제목과 본문을 모두 입력하세요.')
+    }
+
+    setPosts(
+      Posts.map((post, index) => {
+        if (i === index) {
+          post.title = inputEdit.current.value
+          post.content = textareaEdit.current.value
+          post.enableUpdate = false
+        }
+        return post
+      })
+    )
+  }
+
   const deletePost = (i) => {
     const NewPosts = Posts.filter((_, index) => index !== i)
     setPosts(NewPosts)
@@ -69,7 +89,7 @@ function Community() {
         </div>
 
         <div className="btn-box">
-          <button className="btn" type="button">
+          <button className="btn" type="button" onClick={resetForm}>
             Cancel
           </button>
 
@@ -86,7 +106,11 @@ function Community() {
               {post.enableUpdate ? (
                 <aticle className="enable-box">
                   <div className="input-box">
-                    <input type="text" defaultValue={post.title} ref={input} />
+                    <input
+                      type="text"
+                      defaultValue={post.title}
+                      ref={inputEdit}
+                    />
                   </div>
 
                   <div className="input-box">
@@ -96,7 +120,7 @@ function Community() {
                       cols="30"
                       rows="3"
                       defaultValue={post.content}
-                      ref={textarea}
+                      ref={textareaEdit}
                     ></textarea>
                   </div>
 
@@ -111,7 +135,13 @@ function Community() {
                       Cancel
                     </button>
 
-                    <button className="btn" type="button">
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() => {
+                        updatePost(i)
+                      }}
+                    >
                       Update
                     </button>
                   </div>

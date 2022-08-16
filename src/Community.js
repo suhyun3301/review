@@ -28,6 +28,11 @@ function Community() {
     resetForm()
   }
 
+  const deletePost = (i) => {
+    const NewPosts = Posts.filter((_, index) => index !== i)
+    setPosts(NewPosts)
+  }
+
   return (
     <section className="community">
       <div className="create">
@@ -63,8 +68,21 @@ function Community() {
         {Posts.map((post, i) => {
           return (
             <div className="post-list" key={i}>
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
+              <div className="text">
+                <h2>{post.title}</h2>
+                <p>{post.content}</p>
+              </div>
+
+              <div className="btn-box">
+                <button>Edit</button>
+                <button
+                  onClick={() => {
+                    deletePost(i)
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           )
         })}

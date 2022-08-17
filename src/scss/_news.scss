@@ -1,0 +1,21 @@
+.news {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+  .post-list {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+
+    article {
+      border: 1px solid #000;
+      font-size: 15px;
+      padding: 20px;
+      height: 300px;
+    }
+  }
+}

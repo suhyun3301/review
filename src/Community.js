@@ -1,11 +1,30 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 function Community() {
   const input = useRef(null)
   const textarea = useRef(null)
   const inputEdit = useRef(null)
   const textareaEdit = useRef(null)
-  const [Posts, setPosts] = useState([])
   const [Allowed, setAllowed] = useState(true)
+
+  const getLocalData = () => {
+    const dummyPosts = [
+      { title: 'Hello5', content: 'Here comes description in detail.' },
+      { title: 'Hello4', content: 'Here comes description in detail.' },
+      { title: 'Hello3', content: 'Here comes description in detail.' },
+      { title: 'Hello2', content: 'Here comes description in detail.' },
+      { title: 'Hello1', content: 'Here comes description in detail.' },
+    ]
+
+    const data = localStorage.getItem('post')
+
+    if (data) {
+      return JSON.parse(data)
+    } else {
+      return dummyPosts
+    }
+  }
+
+  const [Posts, setPosts] = useState(getLocalData())
 
   const resetForm = () => {
     input.current.value = ''
@@ -18,11 +37,11 @@ function Community() {
     }
 
     setPosts([
-      ...Posts,
       {
         title: input.current.value,
         content: textarea.current.value,
       },
+      ...Posts,
     ])
 
     resetForm()
@@ -75,6 +94,10 @@ function Community() {
     const NewPosts = Posts.filter((_, index) => index !== i)
     setPosts(NewPosts)
   }
+
+  useEffect(() => {
+    localStorage.setItem('post', JSON.stringify(Posts))
+  }, [Posts])
 
   return (
     <section className="community">

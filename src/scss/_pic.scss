@@ -1,0 +1,29 @@
+.pic {
+  position: relative;
+
+  h1 {
+    font-size: 100;
+    font-weight: 600;
+    position: relative;
+    top: 300px;
+    transition: 0.2s;
+  }
+
+  h2 {
+    font-size: 100;
+    font-weight: 600;
+    position: absolute;
+    top: 400px;
+    left: 0;
+    transition: 0.2s;
+  }
+
+  .box {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    bottom: 200px;
+    right: 200px;
+    background-color: yellow;
+  }
+}

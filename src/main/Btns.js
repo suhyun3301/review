@@ -1,7 +1,7 @@
 import Anime from '../assets/Anime'
 import { useEffect, useRef, useState } from 'react'
 
-function Btns({ setIndex }) {
+function Btns({ setScrolled, setPos }) {
   const btnsRef = useRef(null)
   const offsetTop = useRef([])
   const num = 4
@@ -14,6 +14,7 @@ function Btns({ setIndex }) {
     for (const section of sections) {
       offsetTop.current.push(section.offsetTop)
     }
+    setPos(offsetTop.current)
   }
 
   const activation = () => {
@@ -22,6 +23,8 @@ function Btns({ setIndex }) {
       btnsRef.current.parentElement.querySelectorAll('.content-box')
     const scroll = window.scrollY
     const base = -window.innerHeight / 4
+
+    setScrolled(scroll)
 
     offsetTop.current.map((pos, i) => {
       if (scroll >= pos + base) {

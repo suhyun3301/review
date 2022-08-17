@@ -23,6 +23,23 @@ main {
     }
   }
 
+  .visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      margin-bottom: 40px;
+    }
+    .move-community {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      cursor: pointer;
+    }
+  }
+
   .scroll-btns {
     position: fixed;
     top: 50%;

@@ -26,7 +26,7 @@ function News() {
       <h2>News</h2>
       <div className="post-list">
         {Posts.map((post, i) => {
-          if (i >= 3) return
+          if (i >= 4) return
 
           return (
             <article key={i}>

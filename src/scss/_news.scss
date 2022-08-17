@@ -16,6 +16,24 @@
       font-size: 15px;
       padding: 20px;
       height: 300px;
+      transform: translateY(100px) rotateY(220deg);
+      opacity: 0;
+      transition: 0.5s;
+
+      @for $i from 1 through 4 {
+        &:nth-of-type(#{$i}) {
+          transition-delay: 0.2s * ($i - 1);
+        }
+      }
+    }
+  }
+
+  &.on {
+    .post-list {
+      article {
+        transform: translateY(0px) rotateY(0deg);
+        opacity: 1;
+      }
     }
   }
 }

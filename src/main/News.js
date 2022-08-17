@@ -1,5 +1,5 @@
 function News() {
-  return <div>News</div>
+  return <section className="news content-box">News</section>
 }
 
 export default News

@@ -1,5 +1,5 @@
 function Pic() {
-  return <div>Pic</div>
+  return <section className="pic content-box">Pic</section>
 }
 
 export default Pic

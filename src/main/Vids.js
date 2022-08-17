@@ -1,5 +1,5 @@
 function Vids() {
-  return <div>Vids</div>
+  return <section className="vids content-box">Video</section>
 }
 
 export default Vids

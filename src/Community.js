@@ -5,26 +5,13 @@ function Community() {
   const inputEdit = useRef(null)
   const textareaEdit = useRef(null)
   const [Allowed, setAllowed] = useState(true)
+  const [Posts, setPosts] = useState([])
 
-  const getLocalData = () => {
-    const dummyPosts = [
-      { title: 'Hello5', content: 'Here comes description in detail.' },
-      { title: 'Hello4', content: 'Here comes description in detail.' },
-      { title: 'Hello3', content: 'Here comes description in detail.' },
-      { title: 'Hello2', content: 'Here comes description in detail.' },
-      { title: 'Hello1', content: 'Here comes description in detail.' },
-    ]
-
-    const data = localStorage.getItem('post')
-
-    if (data) {
-      return JSON.parse(data)
-    } else {
-      return dummyPosts
-    }
-  }
-
-  const [Posts, setPosts] = useState(getLocalData())
+  useEffect(() => {
+    let data = localStorage.getItem('post')
+    data = JSON.parse(data)
+    setPosts(data)
+  }, [])
 
   const resetForm = () => {
     input.current.value = ''

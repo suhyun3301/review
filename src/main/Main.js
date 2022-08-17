@@ -3,19 +3,30 @@ import News from './News'
 import Pic from './Pic'
 import Vids from './Vids'
 import Btns from './Btns'
-import { useEffect, useRef } from 'react'
-import '../assets/Anime'
+import Anime from '../assets/Anime'
+import { useEffect, useRef, useState } from 'react'
 
 function Main() {
   const main = useRef(null)
+  const offsetTop = useRef([])
+  const [Index, setIndex] = useState(0)
 
-  useEffect(() => {
+  const getOffsetTop = () => {
     const sections = main.current.querySelectorAll('.content-box')
     for (const section of sections) {
-      console.log(section.offsetTop)
+      offsetTop.current.push(section.offsetTop)
     }
-    console.log(sections)
-  }, [])
+  }
+
+  useEffect(() => {
+    getOffsetTop()
+
+    new Anime(window, {
+      prop: 'scroll',
+      value: offsetTop.current[Index],
+      duration: 500,
+    })
+  }, [Index])
 
   return (
     <main ref={main}>
@@ -23,7 +34,7 @@ function Main() {
       <News />
       <Pic />
       <Vids />
-      <Btns />
+      <Btns setIndex={setIndex} />
     </main>
   )
 }

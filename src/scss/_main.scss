@@ -5,6 +5,7 @@ main {
     font-size: 40px;
     text-align: center;
     padding-top: 40px;
+    overflow: hidden;
 
     &:nth-of-type(1) {
       background-color: #ffe811;
